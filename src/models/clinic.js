@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Clinic.init({ // không cần khai báo khóa chính 
+  Clinic.init({ // không cần khai báo khóa chính
+    name: DataTypes.STRING, 
     address: DataTypes.TEXT,
     decription: DataTypes.TEXT,
     image: DataTypes.STRING,

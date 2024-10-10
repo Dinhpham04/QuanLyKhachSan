@@ -32,10 +32,31 @@ let displayGetCRUD = async (req, res) => {
     }); 
 }
 
+let getEditCRUD = async (req, res) => {
+    let userId = req.query.id; 
+    if (userId) {
+        let userData = await CRUDService.getUserInfoById(userId); 
+        res.render('editCRUD.ejs', {
+            userData: userData,
+        });
+    }
+    else {
+        res.send('User not found')
+    }
+}
+
+let putCRUD = async (req, res) => {
+    let data = req.body; // lấy data của các thẻ input có trường nam 
+    await CRUDService.updateUserData(data); 
+    res.redirect('/get-crud');
+}
+
 module.exports = {
     getHomePage,
     getAboutMe,
     getCRUD, 
     postCRUD,
     displayGetCRUD,
+    getEditCRUD, 
+    putCRUD
 }

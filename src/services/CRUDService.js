@@ -41,8 +41,8 @@ let getAllUsers = async () => {
     return new Promise(async (resolve, reject) => {
         try {
             let users = await db.User.findAll({
-                raw: true, 
-            }); 
+                raw: true,
+            });
             resolve(users); // trả về tất cả dữ liệu user
         } catch (error) {
             reject(error);
@@ -50,7 +50,46 @@ let getAllUsers = async () => {
     })
 }
 
+let getUserInfoById = async (userId) => {
+    try {
+        let userInfo = await db.User.findOne({
+            where: {
+                id: userId,
+            },
+            raw: true,  // trả về dữ liệu theo cấu trúc khi lấy dữ liệu
+        })
+        if (userInfo) {
+            return userInfo;
+        }
+        else{
+            return {}; 
+        }
+    } catch (error) {
+        throw error;
+    }
+
+}
+
+let updateUserData = async (data) => {
+    try {
+        await db.User.update(
+        {
+            firstName: data.firstName, 
+            lastName: data.lastName, 
+            address: data.address, 
+            phoneNumber: data.phoneNumber
+        },
+        {
+            where: {id: data.id}
+        }) 
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     createNewUser,
-    getAllUsers, 
+    getAllUsers,
+    getUserInfoById,
+    updateUserData, 
 }

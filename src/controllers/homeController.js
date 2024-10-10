@@ -1,5 +1,5 @@
-import db from "../models/index";
-import CRUDService from "../services/CRUDService";
+import db from "../models/index"; // Lấy database 
+import CRUDService from "../services/CRUDService"; // service là nơi đẩy dữ liệu vào để xử lý dữ liệu
 let getHomePage = async (req, res) => {
     try {
         let data = await db.User.findAll(); // lấy bảng user 
@@ -16,13 +16,20 @@ let getAboutMe = (req, res) => {
 }
 
 let getCRUD = async (req, res) => {
-    return res.render('crud.ejs')
+    return res.render('crud.ejs') // render ra giạo diện crud bằng cách chạy file crud.ejs 
 }
 
-let postCRUD = async (req, res) => {
+let postCRUD = async (req, res) => { // đẩy dữ liệu vào service để sử lý 
     let message = await CRUDService.createNewUser(req.body);
     console.log(message); 
     res.send(message);
+}
+
+let displayGetCRUD = async (req, res) => {
+    let data = await CRUDService.getAllUsers(); 
+    res.render('displayCRUD.ejs', {
+        dataTable: data,
+    }); 
 }
 
 module.exports = {
@@ -30,4 +37,5 @@ module.exports = {
     getAboutMe,
     getCRUD, 
     postCRUD,
+    displayGetCRUD,
 }

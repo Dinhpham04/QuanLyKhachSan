@@ -33,3 +33,6 @@ module.exports = {
     await queryInterface.dropTable('Allcods');
   }
 };
+
+// file này dùng để cấu trúc cơ sở dữ liệu (các bảng trong database )
+// để run các file migration để tạo ra các bảng trong cơ sở dữ liệu gõ lệnh: npx sequelize-cli db:migrate

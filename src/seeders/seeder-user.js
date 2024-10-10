@@ -12,7 +12,7 @@ module.exports = {
         address: '123 Main St',
         gender: 1,
         phoneNumber: '0346119773',
-        image: 'http://', 
+        image: 'http://',
         positionId: '123456',
         roleId: 'ADMIN',
         createdAt: new Date(),
@@ -25,3 +25,5 @@ module.exports = {
     return queryInterface.bulkDelete('Users', null, {});
   }
 };
+
+// định nghĩa ví dụ cho các bảng 

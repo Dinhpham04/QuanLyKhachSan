@@ -1,11 +1,11 @@
 'use strict';
-require('dotenv').config; 
+require('dotenv').config; // dùng để sử dụng các biến môi trường trong env 
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'; // phải chỉ định môi trường chạy app 
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
@@ -41,3 +41,5 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// file này được tạo khi chạy sequelize init 

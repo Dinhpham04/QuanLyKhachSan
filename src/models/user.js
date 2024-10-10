@@ -30,3 +30,6 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };
+
+// dùng để định nghĩa thuộc tính của bảng 
+// Khởi tạo model đầu tiên: npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string

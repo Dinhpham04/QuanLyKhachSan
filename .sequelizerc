@@ -6,3 +6,5 @@ module.exports = {
   'seeders-path': path.resolve('./src/seeders'), // Đường dẫn đến thư mục seeders
   'migrations-path': path.resolve('./src/migrations'), // Đường dẫn đến thư mục migrations
 };
+
+// Cấu hình đường dẫn tới một số file mà sequelize cli dùng trong src mà không cần cd vào src để thao tác 

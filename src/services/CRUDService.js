@@ -87,9 +87,23 @@ let updateUserData = async (data) => {
     }
 }
 
+let deleteUser = async (userId) => {
+    try {
+        let deletedRows =  await db.User.destroy({
+            where: {
+                id: userId,
+            }
+        }
+        )
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     createNewUser,
     getAllUsers,
     getUserInfoById,
     updateUserData, 
+    deleteUser, 
 }

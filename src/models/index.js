@@ -40,6 +40,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = db;  // exports tất cả db 
 
 // file này được tạo khi chạy sequelize init 

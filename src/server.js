@@ -4,9 +4,12 @@ import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./route/web";
 import connectDB from "./config/connectDB"; // connect và check xem đã kết nối được với database chưa 
 require('dotenv').config(); // dùng để chạy câu lệnh process.env.PORT 
-
+const cors = require('cors');
 let app = express(); // instance of express
-
+app.use(cors({
+    origin: 'http://localhost:3000', // Chỉ định cụ thể origin
+    credentials: true // Cho phép gửi cookie
+}));
 // config app 
 
 app.use(bodyParser.json());

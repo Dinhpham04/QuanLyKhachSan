@@ -4,8 +4,8 @@ let getHomePage = async (req, res) => {
     try {
         let data = await db.User.findAll(); // lấy bảng user 
         res.render('homePage.ejs', {
-             data: JSON.stringify(data),
-         }); // truyền data vào view
+            data: JSON.stringify(data),
+        }); // truyền data vào view
     } catch (error) {
         console.log(error);
     }
@@ -21,21 +21,21 @@ let getCRUD = async (req, res) => {
 
 let postCRUD = async (req, res) => { // đẩy dữ liệu vào service để sử lý 
     let message = await CRUDService.createNewUser(req.body);
-    console.log(message); 
+    console.log(message);
     res.send(message);
 }
 
 let displayGetCRUD = async (req, res) => {
-    let data = await CRUDService.getAllUsers(); 
+    let data = await CRUDService.getAllUsers();
     res.render('displayCRUD.ejs', {
         dataTable: data,
-    }); 
+    });
 }
 
 let getEditCRUD = async (req, res) => {
-    let userId = req.query.id; 
+    let userId = req.query.id;
     if (userId) {
-        let userData = await CRUDService.getUserInfoById(userId); 
+        let userData = await CRUDService.getUserInfoById(userId);
         res.render('editCRUD.ejs', {
             userData: userData,
         });
@@ -47,16 +47,27 @@ let getEditCRUD = async (req, res) => {
 
 let putCRUD = async (req, res) => {
     let data = req.body; // lấy data của các thẻ input có trường nam 
-    await CRUDService.updateUserData(data); 
+    await CRUDService.updateUserData(data);
     res.redirect('/get-crud');
+}
+
+let deleteCRUD = async (req, res) => {
+    let userId = req.query.id;
+    if (userId) {
+        await CRUDService.deleteUser(userId);
+        res.redirect('/get-crud');
+    } else {
+        res.send('User not found')
+    }
 }
 
 module.exports = {
     getHomePage,
     getAboutMe,
-    getCRUD, 
+    getCRUD,
     postCRUD,
     displayGetCRUD,
-    getEditCRUD, 
-    putCRUD
+    getEditCRUD,
+    putCRUD,
+    deleteCRUD
 }

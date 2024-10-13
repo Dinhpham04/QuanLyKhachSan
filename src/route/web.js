@@ -16,6 +16,8 @@ let initWebRoutes = (app) => {  // khởi tạo các router
 
     // API 
     router.post('/api/login', userController.handleLogin); 
+    router.get('/api/get-all-user', userController.handleGetAllUser);  
+
   
     // rest api 
     return app.use("/", router);

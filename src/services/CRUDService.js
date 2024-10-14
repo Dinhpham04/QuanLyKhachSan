@@ -61,8 +61,8 @@ let getUserInfoById = async (userId) => {
         if (userInfo) {
             return userInfo;
         }
-        else{
-            return {}; 
+        else {
+            return {};
         }
     } catch (error) {
         throw error;
@@ -73,15 +73,16 @@ let getUserInfoById = async (userId) => {
 let updateUserData = async (data) => {
     try {
         await db.User.update(
-        {
-            firstName: data.firstName, 
-            lastName: data.lastName, 
-            address: data.address, 
-            phoneNumber: data.phoneNumber
-        },
-        {
-            where: {id: data.id}
-        }) 
+            {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                address: data.address,
+                phoneNumber: data.phoneNumber
+            },
+            {
+                where: { id: data.id },
+                raw: false
+            })
     } catch (error) {
         throw error;
     }
@@ -89,7 +90,7 @@ let updateUserData = async (data) => {
 
 let deleteUser = async (userId) => {
     try {
-        let deletedRows =  await db.User.destroy({
+        let deletedRows = await db.User.destroy({
             where: {
                 id: userId,
             }
@@ -104,6 +105,6 @@ module.exports = {
     createNewUser,
     getAllUsers,
     getUserInfoById,
-    updateUserData, 
-    deleteUser, 
+    updateUserData,
+    deleteUser,
 }

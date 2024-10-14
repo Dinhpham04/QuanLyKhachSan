@@ -41,8 +41,42 @@ let handleGetAllUsers = async (req, res) => {
     })
 }
 
+let handleCreateNewUser = async (req, res) => {
+    try {
+        let message = await userService.createNewUser(req.body);
+        return res.status(200).json(message);
+    } catch (e) {
+        throw e
+    }
+}
+
+let handleEditUser = async (req, res) => {
+    try {
+        let data = req.body;
+        let message = await userService.updateUserData(req.body);
+        return res.status(200).json(message);
+    } catch (e) {
+        throw e
+    }
+}
+
+let handleDeleteUser = async (req, res) => {
+    if (!req.body.id) {
+        return res.status(200).json({
+            errCode: 1,
+            message: 'id missing'
+        })
+    }
+
+    let message = await userService.deleteUser(req.body.id);
+    return res.status(200).json(message);
+}
+
 
 module.exports = {
     handleLogin,
-    handleGetAllUsers
+    handleGetAllUsers,
+    handleCreateNewUser,
+    handleEditUser,
+    handleDeleteUser,
 }

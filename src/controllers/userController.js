@@ -24,9 +24,9 @@ let handleLogin = async (req, res) => {
     })
 }
 
-let handleGetAllUser = async (req, res) => {
-    let userId = req.body.id; // ALL, id 
-    if(!userId) {
+let handleGetAllUsers = async (req, res) => {
+    let userId = req.query.id; // ALL, id 
+    if (!userId) {
         return res.status(500).json({
             errCode: 1,
             errMessage: 'id missing',
@@ -44,5 +44,5 @@ let handleGetAllUser = async (req, res) => {
 
 module.exports = {
     handleLogin,
-    handleGetAllUser
+    handleGetAllUsers
 }

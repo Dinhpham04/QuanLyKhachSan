@@ -58,7 +58,6 @@ let checkUserEmail = async (userEmail) => {
 
 let getAllUsers = async (userId) => {
     try {
-        console.log(userId);
         let users = '';
         if (userId === 'ALL') {
             users = await db.User.findAll({

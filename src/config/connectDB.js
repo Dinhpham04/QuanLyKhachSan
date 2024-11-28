@@ -5,6 +5,7 @@ const sequelize = new Sequelize('hoteldb', 'root', null, {
   host: 'localhost', // địa chỉ server 
   dialect: 'mysql',
   logging: false, // loai bo dong log 
+  timezone: '+07:00', // UTC+
 });
 
 

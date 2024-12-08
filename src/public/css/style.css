@@ -1,0 +1,758 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+/* Tổng quát */
+/* Logo */
+/* Container bên phải */
+/* Menu */
+/* User Info */
+/* Dropdown Menu */
+/* Hiện dropdown khi click */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 42px;
+}
+.header .logo {
+  display: flex;
+  align-items: center;
+}
+.header .logo img {
+  height: 50px;
+  margin-right: 6px;
+}
+.header .logo span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+.header .right-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header .menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header .menu a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.header .menu a:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+.header .menu a:hover i {
+  color: #ffffff;
+}
+.header .menu i {
+  font-size: 1rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+.header .user-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.header .user-info > a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.header .user-info > a:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+.header .user-info > a span {
+  font-size: 0.85rem;
+  color: #333;
+}
+.header .user-info > a span:hover {
+  font-size: 0.85rem;
+  color: #fff;
+}
+.header .user-info > a i {
+  font-size: 1.2rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+.header .user-info a:hover i,
+.header .user-info a:hover span {
+  color: #ffffff;
+}
+.header .user-info i:hover {
+  color: #0056b3;
+}
+.header .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+}
+.header .dropdown-menu a {
+  display: block;
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.header .dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+  background-color: #0097dc;
+  padding: 0;
+}
+.navbar .navbar-container {
+  display: flex;
+  justify-content: center;
+}
+.navbar .navbar-container .navbar-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+.navbar .navbar-container .navbar-list .navbar-item {
+  position: relative;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link i {
+  font-size: 16px;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link:hover, .navbar .navbar-container .navbar-list .navbar-item .navbar-link.active {
+  background-color: #007bb5;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #007bb5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu li a {
+  display: block;
+  padding: 5px 30px 5px 20px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu li a:hover {
+  background-color: #0097dc;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.navbar .navbar-container .navbar-list .staff {
+  margin-left: 150px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Toàn bộ trang */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+/* Table container */
+/* Bảng dành riêng cho Hạng phòng */
+/* Nút thao tác */
+.tab-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.tab-btn.active {
+  background-color: #d7efff;
+  color: #007bff;
+}
+
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.table-room-categories {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 13px;
+}
+.table-room-categories thead {
+  background-color: rgb(178, 243, 243);
+  color: #000;
+  text-align: left;
+  font-weight: bold;
+}
+.table-room-categories th {
+  padding: 12px;
+  border: 1px solid #ddd;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.table-room-categories td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.table-room-categories tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+.table-room-categories tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.table-room-categories tbody tr:hover {
+  background-color: rgba(211, 245, 211, 0.5);
+}
+.table-room-categories .btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 5px;
+}
+.table-room-categories .btn.edit {
+  background-color: #007bff;
+}
+.table-room-categories .btn.edit:hover {
+  background-color: #0056b3;
+}
+.table-room-categories .btn.delete {
+  background-color: #dc3545;
+}
+.table-room-categories .btn.delete:hover {
+  background-color: #c82333;
+}
+
+.room-table {
+  width: 100%;
+}
+.room-table th {
+  padding: 8px;
+  text-align: left;
+  background-color: #f4f4f4;
+}
+.room-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.room-row {
+  cursor: pointer;
+}
+.room-row .goods-image {
+  position: relative;
+  /* Để các phần tử con định vị theo .goods-image */
+  width: 40px;
+  height: 40px;
+  /* Ẩn phần hình ảnh to hơn nếu vượt ra ngoài */
+}
+.room-row .goods-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Đảm bảo hình ảnh hiển thị vừa khít khung */
+}
+.room-row .goods-image .zoom-image {
+  display: none;
+  /* Ẩn đi ban đầu */
+  position: absolute;
+  top: -95%;
+  /* Đẩy hình ảnh phóng to lên trên */
+  left: 95%;
+  transform: translateX(-50%);
+  width: 100px;
+  /* Kích thước ảnh to hơn */
+  height: 100px;
+  /* Lấy ảnh từ link */
+  background-size: cover;
+  /* Đảm bảo ảnh phủ kín khung */
+  background-position: center;
+  /* Căn giữa hình ảnh */
+  z-index: 100 !important;
+  /* Hiển thị trên các phần tử khác */
+  border: 2px solid #ddd;
+  /* Tùy chỉnh viền nếu muốn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Hiệu ứng đổ bóng */
+}
+.room-row .goods-image:hover .zoom-image {
+  display: block;
+}
+
+.room-detail-row {
+  background-color: #f9f9f9;
+  display: none;
+  width: 100%;
+}
+
+.room-detail {
+  width: 100%;
+}
+
+.room-content {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.room-image img {
+  width: 300px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.room-info {
+  margin-left: 60px;
+  width: 90%;
+}
+
+.room-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.page-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+.page-login .login-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.page-login .title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+}
+.page-login .subtitle {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.page-login .login-form .input-group {
+  margin-bottom: 1.5rem;
+}
+.page-login .login-form .input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.page-login .login-form .input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.page-login .login-form .input-group input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.page-login .login-form .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-top: -0.8rem;
+}
+.page-login .login-form .options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.page-login .login-form .options .forgot-password {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-login .login-form .options .forgot-password:hover {
+  text-decoration: underline;
+}
+.page-login .login-form .login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.page-login .login-form .login-btn:hover {
+  background-color: rgb(60.5577689243, 139.4422310757, 63.7450199203);
+}
+.page-login .register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+.page-login .register-link a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-login .register-link a:hover {
+  text-decoration: underline;
+}
+
+.page-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+.page-register .register-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.page-register .title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+}
+.page-register .subtitle {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.page-register .register-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.page-register .register-form .input-group {
+  display: flex;
+  flex-direction: column;
+}
+.page-register .register-form .input-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.page-register .register-form .input-group input,
+.page-register .register-form .input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px !important;
+  font-size: 1rem;
+}
+.page-register .register-form .input-group input:focus,
+.page-register .register-form .input-group select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.page-register .register-form .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+}
+.page-register .register-form .register-btn {
+  grid-column: span 2;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.page-register .register-form .register-btn:hover {
+  background-color: rgb(60.5577689243, 139.4422310757, 63.7450199203);
+}
+.page-register .register-form .options {
+  grid-column: span 2;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.page-register .login-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+.page-register .login-link a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-register .login-link a:hover {
+  text-decoration: underline;
+}
+
+.schedule-cell:hover .add-shift {
+  display: block;
+  padding: 2px -2px 2px 4px;
+  background-color: rgb(195, 190, 190);
+  border-radius: 6px;
+  color: #000;
+}
+
+.add-shift {
+  display: none;
+  color: blue;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.shift-name {
+  display: block;
+  background-color: aquamarine;
+  padding: 2px 2px 2px 6px;
+  border-radius: 8px;
+}
+.shift-name .cancel {
+  float: right;
+  font-size: 11px;
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 4px;
+  padding-top: 2px;
+  background-color: transparent;
+  border: none;
+}
+
+.shift-name + .shift-name {
+  margin-top: 6px;
+}
+
+.shift-name + .add-shift {
+  margin-top: 4px;
+}
+
+.staff-room .dashboard {
+  padding: 20px;
+}
+.staff-room .status-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.staff-room .status-bar .status {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+.staff-room .status-bar .status.available {
+  background-color: #0d6efd;
+}
+.staff-room .status-bar .status.pending {
+  background-color: #ffc107;
+}
+.staff-room .status-bar .status.in-use {
+  background-color: #198754;
+}
+.staff-room .status-bar .status.checkout {
+  background-color: #20c997;
+}
+.staff-room .status-bar .status.overdue {
+  background-color: #dc3545;
+}
+.staff-room .floor h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.staff-room .floor .rooms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+.staff-room .floor .rooms .room {
+  background-color: #fefefe;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 190px;
+  width: 250px;
+  border: 1px solid #e1dede;
+}
+.staff-room .floor .rooms .room .room-available {
+  font-weight: 600;
+  font-size: 14px;
+}
+.staff-room .floor .rooms .room .time {
+  padding: 6px 8px;
+  background-color: #ccc;
+  width: 160px;
+  border-radius: 16px;
+}
+.staff-room .floor .rooms .room.dirty {
+  border-left: 5px solid #dc3545;
+}
+.staff-room .floor .rooms .room.clean {
+  border-left: 5px solid #198754;
+}
+.staff-room .floor .rooms .room.clean.in-use {
+  border-left: 5px solid #0d6efd;
+}
+.staff-room .floor .rooms .room .room-header {
+  display: flex;
+}
+.staff-room .floor .rooms .room .room-header .btn-clear {
+  margin-left: auto;
+  border: none;
+  height: 24px;
+  background-color: transparent !important;
+  color: green;
+  cursor: pointer !important;
+}
+.staff-room .floor .rooms .room .room-header .btn-clear.disabled {
+  color: #ccc;
+  cursor: inherit;
+}
+.staff-room .floor .rooms .room .room-header .status-label {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  max-width: 80px;
+}
+.staff-room .floor .rooms .room .room-header .status-label.dirty {
+  background-color: #f8d7da;
+  color: rgb(218, 21, 21);
+}
+.staff-room .floor .rooms .room .room-header .status-label.clean {
+  background-color: #f0e3e3;
+  color: #155724;
+}
+.staff-room .floor .rooms .room .room-header .room-id {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.staff-room .floor .rooms .room p {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.staff-room .floor .rooms .room .prices {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 500;
+}
+.staff-room .floor .rooms .room .prices i {
+  width: 8px;
+  margin-right: 10px;
+}
+.staff-room .floor .rooms .room .time {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+/*# sourceMappingURL=style.css.map */

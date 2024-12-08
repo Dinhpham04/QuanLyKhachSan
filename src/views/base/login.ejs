@@ -1,0 +1,31 @@
+<div class="page-login">
+    <div class="login-container">
+        <div class="form-wrapper">
+            <h1 class="title">Welcome Back</h1>
+            <p class="subtitle">Please login to your account</p>
+            <form action="#" method="POST" class="login-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <% if (error) { %>
+                    <p class="error">
+                        <%= error %>
+                    </p>
+                    <% } %>
+                        <div class="options">
+                            <label>
+                                <input type="checkbox" name="remember"> Remember Me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p class="register-link">Don’t have an account? <a href="/register">Sign up now</a></p>
+        </div>
+    </div>
+</div>

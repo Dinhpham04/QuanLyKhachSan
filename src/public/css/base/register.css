@@ -1,0 +1,98 @@
+.page-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+.page-register .register-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.page-register .title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+}
+.page-register .subtitle {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.page-register .register-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.page-register .register-form .input-group {
+  display: flex;
+  flex-direction: column;
+}
+.page-register .register-form .input-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.page-register .register-form .input-group input,
+.page-register .register-form .input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px !important;
+  font-size: 1rem;
+}
+.page-register .register-form .input-group input:focus,
+.page-register .register-form .input-group select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.page-register .register-form .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+}
+.page-register .register-form .register-btn {
+  grid-column: span 2;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.page-register .register-form .register-btn:hover {
+  background-color: rgb(60.5577689243, 139.4422310757, 63.7450199203);
+}
+.page-register .register-form .options {
+  grid-column: span 2;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.page-register .login-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+.page-register .login-link a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-register .login-link a:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=register.css.map */

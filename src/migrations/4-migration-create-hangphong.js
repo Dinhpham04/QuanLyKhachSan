@@ -12,6 +12,9 @@ module.exports = {
       tenHP: {
         type: Sequelize.STRING
       },
+      maHP: {
+        type: Sequelize.STRING
+      },
       giaGio: {
         type: Sequelize.INTEGER
       },

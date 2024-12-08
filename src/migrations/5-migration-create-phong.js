@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
-      trangTTSD: {
+      trangTSD: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },

@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     giaBan: DataTypes.INTEGER,
     giaVon: DataTypes.INTEGER,
     tonKho: DataTypes.INTEGER,
+    anh: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'HangHoa',

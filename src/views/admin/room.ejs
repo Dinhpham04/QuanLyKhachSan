@@ -1,0 +1,220 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Phòng</h3>
+    </div>
+
+    <div class="tab-container">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Thêm mới</button>
+    </div>
+
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <tr>
+                    <th>Tên phòng</th>
+                    <th>Hạng phòng</th>
+                    <th>Giá giờ</th>
+                    <th>Giá cả ngày</th>
+                    <th>Giá qua đêm</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% phongs.forEach(phong=> { %>
+                    <tr class="room-row" data-room-id="<%= phong.id %>">
+                        <td>
+                            <%= phong.tenPhong %>
+                        </td>
+                        <td>
+                            <%= phong.hangPhong %>
+                        </td>
+                        <td>
+                            <%= phong.giaGio %>
+                        </td>
+                        <td>
+                            <%= phong.giaNgay %>
+                        </td>
+                        <td>
+                            <%= phong.giaDem %>
+                        </td>
+                        <td>
+                            <button class="btn edit btn-update" data-id="<%= phong.id %>" data-bs-toggle="modal"
+                                data-bs-target="#updateModal">Cập Nhật</button>
+                            <form action="/phong/<%= phong.id %>/delete" method="POST" style="display: inline;">
+                                <button class="btn delete" type="submit"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa phòng này?');">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr class="room-detail-row" data-room-id="<%= phong.id %>">
+                        <td colspan="6">
+                            <div class="room-detail">
+                                <div class="room-content">
+                                    <div class="room-image">
+                                        <img src='<%=phong.anhs %>' alt="Hình ảnh phòng">
+                                    </div>
+                                    <div class="room-info">
+                                        <p><strong>Mã hạng phòng:</strong>
+                                            <%= phong.tenPhong %>
+                                        </p>
+                                        <p><strong>Tên hạng phòng:</strong>
+                                            <%= phong.hangPhong %>
+                                        </p>
+                                        <p><strong>Giá giờ:</strong>
+                                            <%= phong.giaGio %>
+                                        </p>
+                                        <p><strong>Giá cả ngày:</strong>
+                                            <%= phong.giaNgay %>
+                                        </p>
+                                        <p><strong>Giá qua đêm:</strong>
+                                            <%= phong.giaDem %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal modal-lg fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="updateForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Cập Nhật Phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="updateId">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="updateTenPhong" class="form-label">Tên Phòng</label>
+                                <input type="text" class="form-control" id="updateTenPhong" name="tenPhong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateHangPhong" class="form-label">Hạng Phòng</label>
+                                <select class="form-select" id="updateHangPhong" name="hangPhongId" required>
+                                    <option value="" selected disabled>Chọn hạng phòng</option>
+                                    <% hangPhongList.forEach(hangPhong=> { %>
+                                        <option value="<%= hangPhong.id %>">
+                                            <%= hangPhong.tenHP %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateHinhAnh" class="form-label">Hình Ảnh</label>
+                                <div>
+                                    <input type="text" class="form-control" id="updateHinhAnh" name="hinhAnh">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <img id="previewImage" src="" alt="Preview" class="img-thumbnail"
+                                    style="max-width: 100%; height: auto;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thêm Mới -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/phong/create" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Thêm Mới Phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="tenPhong" class="form-label">Tên Phòng</label>
+                                <input type="text" class="form-control" id="tenPhong" name="tenPhong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hangPhongId" class="form-label">Hạng Phòng</label>
+                                <select class="form-select" id="hangPhongId" name="hangPhongId" required>
+                                    <option value="" selected disabled>Chọn hạng phòng</option>
+                                    <% hangPhongList.forEach(hangPhong=> { %>
+                                        <option value="<%= hangPhong.id %>">
+                                            <%= hangPhong.tenHP %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hinhAnh" class="form-label">Hình Ảnh</label>
+                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript hiển thị chi tiết
+    document.querySelectorAll(".room-row").forEach(row => {
+        row.addEventListener("click", (e) => {
+            // Bỏ qua nếu click vào nút
+            if (e.target.classList.contains('btn')) return;
+
+            const roomId = row.getAttribute("data-room-id");
+            const detailRow = document.querySelector(`.room-detail-row[data-room-id="${roomId}"]`);
+
+            // Toggle hiển thị
+            if (detailRow.style.display === "none" || detailRow.style.display === "") {
+                detailRow.style.display = "table-row";
+            } else {
+                detailRow.style.display = "none";
+            }
+        });
+    });
+
+    // modal 
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateButtons = document.querySelectorAll('.btn-update');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                const response = await fetch(`/phong/${id}`);
+                const phong = await response.json();
+
+                // Điền dữ liệu vào modal
+                document.getElementById('updateForm').action = `/phong/${id}/update`;
+                document.getElementById('updateId').value = phong.id;
+                document.getElementById('updateTenPhong').value = phong.tenPhong;
+                document.getElementById('updateHangPhong').value = phong.hangPhongId;
+                document.getElementById('updateHinhAnh').value = phong.anhs;
+                document.getElementById('previewImage').src = phong.anhs;
+                document.getElementById('updateHinhAnh').onchange = function () {
+                    document.getElementById('previewImage').src = document.getElementById('updateHinhAnh').value;
+                }
+            });
+        });
+    });
+</script>

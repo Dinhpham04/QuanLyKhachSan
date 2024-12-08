@@ -1,0 +1,282 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Nhân viên</h3>
+    </div>
+
+    <div class="tab-container">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Thêm mới</button>
+    </div>
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <th>Mã nhân viên</th>
+                <th>Tên nhân viên</th>
+                <th>Số điện thoại</th>
+                <th>Số CCCD</th>
+                <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% nhanViens.forEach(nhanvien=> { %>
+                    <tr class="room-row" data-room-id="<%= nhanvien.id %>">
+
+                        <td>
+                            NV00<%= nhanvien.id %>
+                        </td>
+                        <td>
+                            <%= nhanvien.tenNV %>
+                        </td>
+                        <td>
+                            <%= nhanvien.soDT %>
+                        </td>
+                        <td>
+                            <%= nhanvien.soCCCD %>
+                        </td>
+                        <td>
+                            <button class="btn edit btn-update" data-id="<%= nhanvien.id %>" data-bs-toggle="modal"
+                                data-bs-target="#updateModal">Cập Nhật</button>
+                            <form action="/nhanvien/<%= nhanvien.id %>/delete" method="POST" style="display: inline;">
+                                <button class="btn delete" type="submit"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này?');">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr class="room-detail-row" data-room-id="<%= nhanvien.id %>">
+                        <td colspan="6">
+                            <div class="room-detail">
+                                <div class="room-content">
+
+                                    <div class="room-info">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="room-image">
+                                                    <img src='<%=nhanvien.anh %>' alt="Hình ảnh nhân viên">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <p><strong>Mã nhân viên:</strong>
+                                                    NV00<%= nhanvien.id %>
+                                                </p>
+                                                <p><strong>Tên nhân viên:</strong>
+                                                    <%= nhanvien.tenNV %>
+                                                </p>
+                                                <p><strong>Số CCCD:</strong>
+                                                    <%= nhanvien.soCCCD %>
+                                                </p>
+                                                <p><strong>Số điện thoại:</strong>
+                                                    <%= nhanvien.soDT %>
+                                                </p>
+                                                <p><strong>Giới tính:</strong>
+                                                    <%= nhanvien.gioiTinh=='1' ? 'Nam' : 'Nữ' %>
+                                                </p>
+                                            </div>
+                                            <div class="col">
+                                                <p><strong>Ngày sinh:</strong>
+                                                    <%= nhanvien.ngaySinh %>
+                                                </p>
+                                                <p><strong>Email:</strong>
+                                                    <%= nhanvien.email %>
+                                                </p>
+                                                <p><strong>Chức danh:</strong>
+                                                    <%= nhanvien.chucDanh %>
+                                                </p>
+                                                <p><strong>Mã chấm công:</strong>
+                                                    <%= nhanvien.maCC %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal modal-lg fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="updateForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Cập Nhật Nhân Viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="updateId">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="tenNhanVienUpdate" class="form-label">Tên nhân viên</label>
+                                <input type="text" class="form-control" id="tenNhanVienUpdate" name="tenNhanVien"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="soDienThoaiUpdate" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" id="soDienThoaiUpdate" name="soDienThoai"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hinhAnhUpdate" class="form-label">Hình ảnh</label>
+                                <input type="text" class="form-control" id="hinhAnhUpdate" name="hinhAnh">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gioiTinhUpdate" class="form-label">Giới tính</label>
+                                <select class="form-select" id="gioiTinhUpdate" name="gioiTinh" required>
+                                    <option value="" selected disabled>Chọn giới tính</option>
+                                    <option value="1">
+                                        Nam
+                                    </option>
+                                    <option value="0">
+                                        Nữ
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="soCCCDUpdate" class="form-label">Căn cước công dân</label>
+                                <input type="text" class="form-control" id="soCCCDUpdate" name="soCCCD" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ngaySinhUpdate" class="form-label">Ngày sinh</label>
+                                <input type="text" class="form-control" id="ngaySinhUpdate" name="ngaySinh" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailUpdate" class="form-label">email</label>
+                                <input type="text" class="form-control" id="emailUpdate" name="email" required readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="matKhauUpdate" class="form-label">Mật khẩu</label>
+                                <input type="text" class="form-control" id="matKhauUpdate" name="matKhau" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Thêm Mới -->
+<div class="modal modal-lg fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/nhanvien/create" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Thêm Mới Nhân Viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="tenNhanVien" class="form-label">Tên nhân viên</label>
+                                <input type="text" class="form-control" id="tenNhanVien" name="tenNhanVien" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="soDienThoai" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" id="soDienThoai" name="soDienThoai" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hinhAnh" class="form-label">Hình ảnh</label>
+                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gioiTinh" class="form-label">Giới tính</label>
+                                <select class="form-select" id="gioiTinh" name="gioiTinh" required>
+                                    <option value="" selected disabled>Chọn giới tính</option>
+                                    <option value="1">
+                                        Nam
+                                    </option>
+                                    <option value="0">
+                                        Nữ
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="soCCCD" class="form-label">Căn cước công dân</label>
+                                <input type="text" class="form-control" id="soCCCD" name="soCCCD" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ngaySinh" class="form-label">Ngày sinh</label>
+                                <input type="text" class="form-control" id="ngaySinh" name="ngaySinh" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">email</label>
+                                <input type="text" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="matKhau" class="form-label">Mật khẩu</label>
+                                <input type="text" class="form-control" id="matKhau" name="matKhau" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" <% if (error) { %>
+                        onclick="return alert('<%= error.message %>');"
+                            <% } %>
+                                >Thêm mới
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // JavaScript hiển thị chi tiết
+    document.querySelectorAll(".room-row").forEach(row => {
+        row.addEventListener("click", (e) => {
+            // Bỏ qua nếu click vào nút
+            if (e.target.classList.contains('btn')) return;
+
+            const roomId = row.getAttribute("data-room-id");
+            const detailRow = document.querySelector(`.room-detail-row[data-room-id="${roomId}"]`);
+
+            // Toggle hiển thị
+            if (detailRow.style.display === "none" || detailRow.style.display === "") {
+                detailRow.style.display = "table-row";
+            } else {
+                detailRow.style.display = "none";
+            }
+        });
+    });
+
+    // modal 
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateButtons = document.querySelectorAll('.btn-update');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                const response = await fetch(`/nhanvien/${id}`);
+                const nhanvien = await response.json();
+
+                // Điền dữ liệu vào modal
+                document.getElementById('updateForm').action = `/nhanvien/${id}/update`;
+                document.getElementById('updateId').value = nhanvien.id;
+                document.getElementById('tenNhanVienUpdate').value = nhanvien.tenNV;
+                document.getElementById('soDienThoaiUpdate').value = nhanvien.soDT;
+                document.getElementById('hinhAnhUpdate').value = nhanvien.anh;
+                document.getElementById('gioiTinhUpdate').value = nhanvien.gioiTinh;
+                document.getElementById('soCCCDUpdate').value = nhanvien.soCCCD;
+                document.getElementById('ngaySinhUpdate').value = nhanvien.ngaySinh;
+                document.getElementById('emailUpdate').value = nhanvien.email;
+                document.getElementById('matKhauUpdate').value = "";
+            });
+        });
+    });
+</script>

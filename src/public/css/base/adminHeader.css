@@ -1,0 +1,196 @@
+@charset "UTF-8";
+/* Tổng quát */
+/* Logo */
+/* Container bên phải */
+/* Menu */
+/* User Info */
+/* Dropdown Menu */
+/* Hiện dropdown khi click */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 42px;
+}
+.header .logo {
+  display: flex;
+  align-items: center;
+}
+.header .logo img {
+  height: 50px;
+  margin-right: 6px;
+}
+.header .logo span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+.header .right-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header .menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header .menu a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.header .menu a:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+.header .menu a:hover i {
+  color: #ffffff;
+}
+.header .menu i {
+  font-size: 1rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+.header .user-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.header .user-info > a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.header .user-info > a:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+.header .user-info > a span {
+  font-size: 0.85rem;
+  color: #333;
+}
+.header .user-info > a span:hover {
+  font-size: 0.85rem;
+  color: #fff;
+}
+.header .user-info > a i {
+  font-size: 1.2rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+.header .user-info a:hover i,
+.header .user-info a:hover span {
+  color: #ffffff;
+}
+.header .user-info i:hover {
+  color: #0056b3;
+}
+.header .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+}
+.header .dropdown-menu a {
+  display: block;
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.header .dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+  background-color: #0097dc;
+  padding: 0;
+}
+.navbar .navbar-container {
+  display: flex;
+  justify-content: center;
+}
+.navbar .navbar-container .navbar-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+.navbar .navbar-container .navbar-list .navbar-item {
+  position: relative;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link i {
+  font-size: 16px;
+}
+.navbar .navbar-container .navbar-list .navbar-item .navbar-link:hover, .navbar .navbar-container .navbar-list .navbar-item .navbar-link.active {
+  background-color: #007bb5;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #007bb5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu li a {
+  display: block;
+  padding: 5px 30px 5px 20px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown .dropdown-menu li a:hover {
+  background-color: #0097dc;
+}
+.navbar .navbar-container .navbar-list .navbar-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.navbar .navbar-container .navbar-list .staff {
+  margin-left: 150px;
+}
+
+/*# sourceMappingURL=adminHeader.css.map */

@@ -1,0 +1,186 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Hàng Hóa & Dịch Vụ</h3>
+    </div>
+
+    <div class="tab-container">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Thêm mới</button>
+    </div>
+
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Mã hàng hóa</th>
+                    <th>Tên hàng hóa</th>
+                    <th>Giá bán</th>
+                    <th>Giá vốn</th>
+                    <th>Giá tồn kho</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% hangHoas.forEach(hangHoa=> { %>
+                    <tr class="room-row" data-room-id="<%= hangHoa.id %>">
+                        <td>
+                            <div class="goods-image">
+                                <img src='<%= hangHoa.anh %>' alt="Hình ảnh hàng hóa">
+                                <div class="zoom-image" style="background-image: url('<%= hangHoa.anh %>')"></div>
+                            </div>
+                        </td>
+                        <td>
+                            SP00<%= hangHoa.id %>
+                        </td>
+                        <td>
+                            <%= hangHoa.tenHH %>
+                        </td>
+                        <td>
+                            <%= hangHoa.giaBan %>
+                        </td>
+                        <td>
+                            <%= hangHoa.giaVon %>
+                        </td>
+                        <td>
+                            <%= hangHoa.tonKho %>
+                        </td>
+                        <td>
+                            <button class="btn edit btn-update" data-id="<%= hangHoa.id %>" data-bs-toggle="modal"
+                                data-bs-target="#updateModal">Cập Nhật</button>
+                            <form action="/hangHoa/<%= hangHoa.id %>/delete" method="POST" style="display: inline;">
+                                <button class="btn delete" type="submit"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa hàng hóa này?');">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal modal-lg fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="updateForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Cập Nhật Hàng Hóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="updateId">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="updateTenHangHoa" class="form-label">Tên Hàng Hóa</label>
+                                <input type="text" class="form-control" id="updateTenHangHoa" name="tenHangHoa"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateGiaBan" class="form-label">Giá Bán</label>
+                                <input type="number" class="form-control" id="updateGiaBan" name="giaBan" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateGiaVon" class="form-label">Giá Vốn</label>
+                                <input type="number" class="form-control" id="updateGiaVon" name="giaVon" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateTonKho" class="form-label">Tồn Kho</label>
+                                <input type="number" class="form-control" id="updateTonKho" name="tonKho" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="updateHinhAnh" class="form-label">Hình Ảnh</label>
+                                <div>
+                                    <input type="text" class="form-control" id="updateHinhAnh" name="hinhAnh">
+                                    <img id="previewImage" src="" alt="Preview" class="img-thumbnail"
+                                        style="max-width: 100%; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thêm Mới -->
+<div class="modal modal-lg fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/hanghoa/create" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Thêm Mới Hàng Hóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="tenHangHoa" class="form-label">Tên Hàng Hóa</label>
+                                <input type="text" class="form-control" id="tenHangHoa" name="tenHangHoa" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hinhAnh" class="form-label">Hình Ảnh</label>
+                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tonKho" class="form-label">Tồn Kho</label>
+                                <input type="number" class="form-control" id="tonKho" name="tonKho" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="giaBan" class="form-label">Giá Bán</label>
+                                <input type="number" class="form-control" id="giaBan" name="giaBan" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="giaVon" class="form-label">Giá Vốn</label>
+                                <input type="number" class="form-control" id="giaVon" name="giaVon" required>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript hiển thị chi tiết
+    // modal 
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateButtons = document.querySelectorAll('.btn-update');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                const response = await fetch(`/hanghoa/${id}`);
+                const hangHoa = await response.json();
+                console.log(hangHoa);
+                // Điền dữ liệu vào modal
+                document.getElementById('updateForm').action = `/hanghoa/${id}/update`;
+                document.getElementById('updateId').value = hangHoa.id;
+                document.getElementById('updateTenHangHoa').value = hangHoa.tenHH;
+                document.getElementById('updateGiaBan').value = hangHoa.giaBan;
+                document.getElementById('updateGiaVon').value = hangHoa.giaVon;
+                document.getElementById('updateTonKho').value = hangHoa.tonKho;
+                document.getElementById('updateHinhAnh').value = hangHoa.anh;
+                document.getElementById('previewImage').src = hangHoa.anh;
+                document.getElementById('updateHinhAnh').onchange = function () {
+                    document.getElementById('previewImage').src = document.getElementById('updateHinhAnh').value;
+                }
+            });
+        });
+    });
+</script>

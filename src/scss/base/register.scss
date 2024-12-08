@@ -1,0 +1,118 @@
+// Variables
+$primary-color: #4caf50;
+$secondary-color: #ffffff;
+$text-color: #333;
+$border-radius: 8px;
+
+// Register page wrapper
+.page-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+
+    .register-container {
+        background-color: $secondary-color;
+        padding: 2rem;
+        width: 100%;
+        max-width: 800px;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $primary-color;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        color: $text-color;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .register-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+                color: $text-color;
+            }
+
+            input,
+            select {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: $border-radius !important;
+                font-size: 1rem;
+                // margin-bottom: 0.5rem;
+
+                &:focus {
+                    border-color: $primary-color;
+                    outline: none;
+                    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+                }
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: -1rem;
+            margin-bottom: -1rem;
+        }
+
+        .register-btn {
+            grid-column: span 2;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: $primary-color;
+            color: $secondary-color;
+            border: none;
+            border-radius: $border-radius;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+
+        .options {
+            grid-column: span 2;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: $text-color;
+
+        a {
+            color: $primary-color;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,0 +1,250 @@
+$color_1: #333;
+$color_2: #ffffff;
+$color_3: #007bff;
+$color_4: #fff;
+$color_5: #0056b3;
+$font-family_1: Arial, sans-serif;
+$background-color_1: #f8f9fa;
+$background-color_2: #ffffff;
+$background-color_3: #007bff;
+$background-color_4: #f1f1f1;
+
+/* Tổng quát */
+/* Logo */
+/* Container bên phải */
+/* Menu */
+/* User Info */
+/* Dropdown Menu */
+/* Hiện dropdown khi click */
+body {
+    margin: 0;
+    font-family: $font-family_1;
+    background-color: $background-color_1;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    background-color: $background-color_2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 42px;
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 50px;
+            margin-right: 6px;
+        }
+
+        span {
+            font-size: 1rem;
+            font-weight: bold;
+            color: $color_1;
+        }
+    }
+
+    .right-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: $color_1;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $background-color_3;
+                color: $color_2;
+
+                i {
+                    color: $color_2;
+                }
+            }
+        }
+
+        i {
+            font-size: 1rem;
+            color: $color_3;
+            transition: color 0.3s ease;
+        }
+    }
+
+    .user-info {
+        >a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: $color_1;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $background-color_3;
+                color: $color_2;
+            }
+
+            span {
+                font-size: 0.85rem;
+                color: $color_1;
+
+                &:hover {
+                    font-size: 0.85rem;
+                    color: $color_4;
+                }
+            }
+
+            i {
+                font-size: 1.2rem;
+                color: $color_3;
+                transition: color 0.3s ease;
+            }
+        }
+
+        a {
+            &:hover {
+
+                i,
+                span {
+                    color: $color_2;
+                }
+            }
+        }
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+
+        i {
+            &:hover {
+                color: $color_5;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: $background-color_2;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        z-index: 10;
+
+        a {
+            display: block;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            color: $color_1;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $background-color_4;
+            }
+        }
+    }
+}
+
+.navbar {
+    background-color: #0097dc;
+    padding: 0;
+    // height: 41px;
+
+    .navbar-container {
+        display: flex;
+        justify-content: center;
+
+        .navbar-list {
+            list-style: none;
+            display: flex;
+            // gap: 15px;
+            margin: 0;
+
+            .navbar-item {
+                position: relative; // Để xử lý dropdown
+
+                .navbar-link {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px; // Khoảng cách giữa icon và text
+                    text-decoration: none;
+                    color: white;
+                    font-size: 14px;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    transition: background-color 0.3s ease;
+
+                    i {
+                        font-size: 16px; // Font size của icon
+                    }
+
+                    &:hover,
+                    &.active {
+                        background-color: #007bb5;
+                    }
+                }
+
+                // Dropdown menu
+                &.dropdown {
+                    .dropdown-menu {
+                        display: none; // Ẩn menu phụ mặc định
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background-color: #007bb5;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                        border-radius: 5px;
+                        z-index: 1000;
+
+                        li {
+                            a {
+                                display: block;
+                                padding: 5px 30px 5px 20px;
+                                text-decoration: none;
+                                color: #fff;
+                                font-size: 14px;
+                                transition: color 0.3s ease;
+
+                                &:hover {
+                                    background-color: #0097dc;
+                                }
+                            }
+                        }
+                    }
+
+                    &:hover .dropdown-menu {
+                        display: block; // Hiển thị menu phụ khi hover
+                    }
+                }
+            }
+
+            .staff {
+                margin-left: 150px;
+            }
+        }
+    }
+}

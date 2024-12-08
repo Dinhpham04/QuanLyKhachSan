@@ -1,0 +1,97 @@
+.page-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+.page-login .login-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.page-login .title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+}
+.page-login .subtitle {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.page-login .login-form .input-group {
+  margin-bottom: 1.5rem;
+}
+.page-login .login-form .input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.page-login .login-form .input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.page-login .login-form .input-group input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.page-login .login-form .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-top: -0.8rem;
+}
+.page-login .login-form .options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.page-login .login-form .options .forgot-password {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-login .login-form .options .forgot-password:hover {
+  text-decoration: underline;
+}
+.page-login .login-form .login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.page-login .login-form .login-btn:hover {
+  background-color: rgb(60.5577689243, 139.4422310757, 63.7450199203);
+}
+.page-login .register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+.page-login .register-link a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.page-login .register-link a:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=login.css.map */

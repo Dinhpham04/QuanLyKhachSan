@@ -1,0 +1,43 @@
+.schedule-cell:hover .add-shift {
+  display: block;
+  padding: 2px -2px 2px 4px;
+  background-color: rgb(195, 190, 190);
+  border-radius: 6px;
+  color: #000;
+}
+
+.add-shift {
+  display: none;
+  color: blue;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.shift-name {
+  display: block;
+  background-color: aquamarine;
+  padding: 2px 2px 2px 6px;
+  border-radius: 8px;
+}
+.shift-name .cancel {
+  float: right;
+  font-size: 11px;
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 4px;
+  padding-top: 2px;
+  background-color: transparent;
+  border: none;
+}
+
+.shift-name + .shift-name {
+  margin-top: 6px;
+}
+
+.shift-name + .add-shift {
+  margin-top: 4px;
+}
+
+/*# sourceMappingURL=schedule.css.map */

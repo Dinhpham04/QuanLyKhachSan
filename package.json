@@ -5,7 +5,8 @@
   "main": "server.js ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node src/server.js",
+    "watch": "npx sass --watch src/scss:src/public/css"
   },
   "keywords": [
     "fullstack",
@@ -22,7 +23,10 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
     "mysql2": "^3.11.3",
+    "node-sass-middleware": "^1.1.0",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {
@@ -30,6 +34,7 @@
     "@babel/node": "^7.25.7",
     "@babel/preset-env": "^7.25.7",
     "nodemon": "^3.1.7",
+    "sass": "^1.81.0",
     "sequelize-cli": "^6.6.2"
   }
 }

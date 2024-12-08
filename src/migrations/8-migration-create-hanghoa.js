@@ -21,6 +21,9 @@ module.exports = {
       tonKho: {
         type: Sequelize.INTEGER
       },
+      anh: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

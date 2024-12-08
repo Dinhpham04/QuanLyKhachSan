@@ -1,0 +1,234 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Hạng Phòng</h3>
+    </div>
+
+    <div class="tab-container">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Thêm mới</button>
+    </div>
+
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <tr>
+                    <th>Mã hạng phòng</th>
+                    <th>Tên hạng phòng</th>
+                    <th>Giá giờ</th>
+                    <th>Giá cả ngày</th>
+                    <th>Giá qua đêm</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% hangPhongs.forEach(hangPhong=> { %>
+                    <tr class="room-row" data-room-id="<%= hangPhong.id %>">
+                        <td>
+                            <%= hangPhong.maHP %>
+                        </td>
+                        <td>
+                            <%= hangPhong.tenHP %>
+                        </td>
+                        <td>
+                            <%= hangPhong.giaGio %>
+                        </td>
+                        <td>
+                            <%= hangPhong.giaNgay %>
+                        </td>
+                        <td>
+                            <%= hangPhong.giaDem %>
+                        </td>
+                        <td>
+                            <button class="btn edit btn-update" data-id="<%= hangPhong.id %>" data-bs-toggle="modal"
+                                data-bs-target="#updateModal">Cập Nhật</button>
+                            <form action="/hangphong/<%= hangPhong.id %>/delete" method="POST" style="display: inline;">
+                                <button class="btn delete" type="submit"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa hạng phòng này?');">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr class="room-detail-row" data-room-id="<%= hangPhong.id %>">
+                        <td colspan="6">
+                            <div class="room-detail">
+                                <div class="room-content">
+                                    <div class="room-image">
+                                        <img src='<%=hangPhong.anh %>' alt="Hình ảnh hạng phòng">
+                                    </div>
+                                    <div class="room-info">
+                                        <p><strong>Mã hạng phòng:</strong>
+                                            <%= hangPhong.maHP %>
+                                        </p>
+                                        <p><strong>Tên hạng phòng:</strong>
+                                            <%= hangPhong.tenHP %>
+                                        </p>
+                                        <p><strong>Giá giờ:</strong>
+                                            <%= hangPhong.giaGio %>
+                                        </p>
+                                        <p><strong>Giá cả ngày:</strong>
+                                            <%= hangPhong.giaNgay %>
+                                        </p>
+                                        <p><strong>Giá qua đêm:</strong>
+                                            <%= hangPhong.giaDem %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal modal-lg fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="updateForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Cập Nhật Hạng Phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="updateId">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="updateMaHangPhong" class="form-label">Mã Hạng Phòng</label>
+                                <input type="text" class="form-control" id="updateMaHangPhong" name="maHangPhong"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateTenHangPhong" class="form-label">Tên Hạng Phòng</label>
+                                <input type="text" class="form-control" id="updateTenHangPhong" name="tenHangPhong"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateHinhAnh" class="form-label">Hình Ảnh</label>
+                                <div>
+                                    <input type="text" class="form-control" id="updateHinhAnh" name="hinhAnh">
+                                    <img id="previewImage" src="" alt="Preview" class="img-thumbnail"
+                                        style="max-width: 60%; height: auto;">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="updateGiaNgay" class="form-label">Giá Ngày</label>
+                                <input type="number" class="form-control" id="updateGiaNgay" name="giaNgay" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateGiaDem" class="form-label">Giá Đêm</label>
+                                <input type="number" class="form-control" id="updateGiaDem" name="giaDem" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateGiaGio" class="form-label">Giá Giờ</label>
+                                <input type="number" class="form-control" id="updateGiaGio" name="giaGio" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thêm Mới -->
+<div class="modal modal-lg fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/hangphong/create" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">Thêm Mới Hạng Phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="maHangPhong" class="form-label">Mã Hạng Phòng</label>
+                                <input type="text" class="form-control" id="maHangPhong" name="maHangPhong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tenHangPhong" class="form-label">Tên Hạng Phòng</label>
+                                <input type="text" class="form-control" id="tenHangPhong" name="tenHangPhong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hinhAnh" class="form-label">Hình Ảnh</label>
+                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="giaGio" class="form-label">Giá Giờ</label>
+                                <input type="number" class="form-control" id="giaGio" name="giaGio" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="giaNgay" class="form-label">Giá Ngày</label>
+                                <input type="number" class="form-control" id="giaNgay" name="giaNgay" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="giaDem" class="form-label">Giá Đêm</label>
+                                <input type="number" class="form-control" id="giaDem" name="giaDem" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript hiển thị chi tiết
+    document.querySelectorAll(".room-row").forEach(row => {
+        row.addEventListener("click", (e) => {
+            // Bỏ qua nếu click vào nút
+            if (e.target.classList.contains('btn')) return;
+
+            const roomId = row.getAttribute("data-room-id");
+            const detailRow = document.querySelector(`.room-detail-row[data-room-id="${roomId}"]`);
+
+            // Toggle hiển thị
+            if (detailRow.style.display === "none" || detailRow.style.display === "") {
+                detailRow.style.display = "table-row";
+            } else {
+                detailRow.style.display = "none";
+            }
+        });
+    });
+
+    // modal 
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateButtons = document.querySelectorAll('.btn-update');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                const response = await fetch(`/hangphong/${id}`);
+                const hangPhong = await response.json();
+
+                // Điền dữ liệu vào modal
+                document.getElementById('updateForm').action = `/hangphong/${id}/update`;
+                document.getElementById('updateId').value = hangPhong.id;
+                document.getElementById('updateMaHangPhong').value = hangPhong.maHP;
+                document.getElementById('updateTenHangPhong').value = hangPhong.tenHP;
+                document.getElementById('updateGiaGio').value = hangPhong.giaGio;
+                document.getElementById('updateGiaNgay').value = hangPhong.giaNgay;
+                document.getElementById('updateGiaDem').value = hangPhong.giaDem;
+                document.getElementById('updateHinhAnh').value = hangPhong.anh;
+                document.getElementById('previewImage').src = hangPhong.anh;
+                document.getElementById('updateHinhAnh').onchange = function () {
+                    document.getElementById('previewImage').src = document.getElementById('updateHinhAnh').value;
+                }
+            });
+        });
+    });
+</script>

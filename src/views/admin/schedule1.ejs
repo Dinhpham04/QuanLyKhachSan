@@ -1,0 +1,205 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Ca làm việc</h3>
+    </div>
+
+    <div class="tab-container">
+        <div class="schedule-navigation">
+            <button id="prev-week" class="btn btn-primary">Tuần trước</button>
+            <button id="current-week" class="btn btn-secondary">Tuần hiện tại</button>
+            <button id="next-week" class="btn btn-primary">Tuần tiếp theo</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <tr>
+                    <th>Nhân viên</th>
+                    <% days.forEach(day=> { %>
+                        <th>
+                            <%= day.day %>
+                                <small>
+                                    <%= new Date(day.fullDate).getDate() + "/" + (new Date(day.fullDate).getMonth() + 1)
+                                        %>
+                                </small>
+                        </th>
+                        <% }) %>
+
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                <% employees.forEach(employee=> { %>
+                    <tr>
+                        <td>
+                            <span>
+                                <%= employee.tenNV %>
+                            </span>
+                        </td>
+                        <% days.forEach(day=> { %>
+                            <td class="schedule-cell" data-employee-id="<%= employee.id %>"
+                                data-date="<%= day.fullDate %>">
+                                <% const scheduleEntries=schedule.filter(s=>
+                                    s.maNhanVien === employee.id &&
+                                    s.ngayLamViec.toISOString().split('T')[0] === day.fullDate
+                                    ); %>
+
+                                    <% if (scheduleEntries.length> 0) { %>
+                                        <% scheduleEntries.forEach(entry=> { %>
+                                            <span class="shift-name">
+                                                <%= entry.tenCa %>
+                                                    <form action="/lichlamviec/<%= entry.maLichLV %>/delete"
+                                                        method="POST" style="display: inline;">
+                                                        <input type="hidden" name="week" id="week-field" value="" />
+                                                        <button class="cancel" type="submit"
+                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa lịch làm việc này?');"><i
+                                                                class="fa-solid fa-x"></i></button>
+                                                    </form>
+
+                                            </span>
+                                            <% }); %>
+                                                <a href="#" class="add-shift" data-bs-toggle="modal"
+                                                    data-bs-target="#shiftModal" data-employee-id="<%= employee.id %>"
+                                                    data-employee-name="<%= employee.tenNV %>"
+                                                    data-date="<%= day.fullDate %>">
+                                                    + Thêm ca
+                                                </a>
+                                                <% } else { %>
+                                                    <a href="#" class="add-shift" data-bs-toggle="modal"
+                                                        data-bs-target="#shiftModal"
+                                                        data-employee-id="<%= employee.id %>"
+                                                        data-employee-name="<%= employee.tenNV %>"
+                                                        data-date="<%= day.fullDate %>">
+                                                        + Thêm ca
+                                                    </a>
+                                                    <% } %>
+                            </td>
+                            <% }); %>
+                    </tr>
+                    <% }) %>
+            </tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="shiftModal" tabindex="-1" aria-labelledby="shiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="shiftModalLabel"></h5>
+                    <small id="shiftDate"></small>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/lichlamviec/create" method="POST" id="shiftForm">
+                    <input type="hidden" id="modalEmployeeId" name="employeeId">
+                    <input type="hidden" id="modalDate" name="date">
+                    <input type="hidden" id="return-week" name="week" value="">
+
+                    <div class="mb-3">
+                        <label for="shift" class="form-label">Ca làm việc</label>
+                        <select id="shift" name="shift" class="form-select">
+                            <!-- Options sẽ được render động qua JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Ghi chú</label>
+                        <textarea id="note" name="note" class="form-control"
+                            placeholder="Nhập ghi chú (tuỳ chọn)"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Thêm mới</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.add-shift').forEach(button => {
+        button.addEventListener('click', async () => {
+            const employeeId = button.getAttribute('data-employee-id');
+            const date = button.getAttribute('data-date');
+
+            const name = button.getAttribute('data-employee-name');
+            // Gán dữ liệu vào modal
+            document.getElementById('modalEmployeeId').value = employeeId;
+            document.getElementById('modalDate').value = date;
+            document.getElementById('shiftModalLabel').innerText = name;
+            const shiftDate = new Date(date);
+            const days = ['Chủ Nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
+            document.getElementById('shiftDate').innerText = `${days[shiftDate.getDay()]}, ${date}`;
+
+
+            try {
+                const response = await fetch(`/calamvieckhadung?employeeId=${employeeId}&date=${date}`);
+                const availableShifts = await response.json();
+                // Render các ca làm việc khả dụng vào select
+                const shiftSelect = document.getElementById('shift');
+                shiftSelect.innerHTML = ''; // Xóa các option cũ
+                availableShifts.forEach(shift => {
+                    const option = document.createElement('option');
+                    option.value = shift.id;
+                    option.textContent = shift.tenCaLV;
+                    shiftSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Lỗi khi lấy danh sách ca làm việc khả dụng:', error);
+                alert('Không thể lấy danh sách ca làm việc khả dụng!');
+            }
+
+        });
+    });
+
+    // Xử lý khi submit form
+    document.getElementById('shiftForm').addEventListener('submit', (event) => {
+
+        // Gửi dữ liệu tới server
+        const modal = bootstrap.Modal.getInstance(document.getElementById('shiftModal'));
+        modal.hide();
+    });
+
+
+    // Lấy giá trị hiện tại của week từ URL
+    const getCurrentWeek = () => {
+        const url = new URL(window.location.href);
+        return parseInt(url.searchParams.get('week') || 0, 10);
+    };
+
+    // Cập nhật URL và reload trang
+    const updateWeekAndReload = (newWeek) => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('week', newWeek);
+        window.location.href = url.toString(); // Reload trang với giá trị mới
+    };
+
+    // Gắn sự kiện click cho nút "Tuần trước"
+    document.getElementById('prev-week').addEventListener('click', () => {
+        const currentWeek = getCurrentWeek();
+        updateWeekAndReload(currentWeek - 1); // Giảm 1 giá trị
+    });
+
+    // Gắn sự kiện click cho nút "Tuần tiếp theo"
+    document.getElementById('next-week').addEventListener('click', () => {
+        const currentWeek = getCurrentWeek();
+        updateWeekAndReload(currentWeek + 1); // Tăng 1 giá trị
+    });
+
+    // Gắn sự kiện click cho nút "Tuần hiện tại"
+    document.getElementById('current-week').addEventListener('click', () => {
+        updateWeekAndReload(0); // Trở về giá trị mặc định
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const week = urlParams.get('week') || '0';
+    document.getElementById('week-field').value = week;
+    document.getElementById('return-week').value = week;
+</script>

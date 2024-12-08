@@ -1,0 +1,120 @@
+// Variables
+$primary-color: #4caf50;
+$secondary-color: #ffffff;
+$text-color: #333;
+$border-radius: 8px;
+
+// Login page wrapper
+.page-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+
+    .login-container {
+        background-color: $secondary-color;
+        padding: 2rem;
+        width: 100%;
+        max-width: 400px;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $primary-color;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        color: $text-color;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .login-form {
+        .input-group {
+            margin-bottom: 1.5rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+                color: $text-color;
+            }
+
+            input {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: $border-radius;
+                font-size: 1rem;
+
+                &:focus {
+                    border-color: $primary-color;
+                    outline: none;
+                    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+                }
+            }
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            margin-top: -0.8rem;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+
+            .forgot-password {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: $primary-color;
+            color: $secondary-color;
+            border: none;
+            border-radius: $border-radius;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: $text-color;
+
+        a {
+            color: $primary-color;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

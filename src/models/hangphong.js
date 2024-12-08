@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   HangPhong.init({ // không cần khai báo khóa chính 
     tenHP: DataTypes.STRING,
+    maHP: DataTypes.STRING,
     giaGio: DataTypes.INTEGER,
     giaNgay: DataTypes.INTEGER,
     giaDem: DataTypes.INTEGER,

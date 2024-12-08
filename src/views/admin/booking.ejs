@@ -1,0 +1,176 @@
+<div class="container">
+    <div class="tab-container">
+        <h3>Đặt Phòng</h3>
+    </div>
+
+
+
+    <div class="table-container">
+        <table class="table-room-categories">
+            <thead>
+                <tr>
+                    <th>Mã đặt phòng</th>
+                    <th>Trạng thái</th>
+                    <th>Thời gian đặt</th>
+                    <th>Tên phòng</th>
+                    <th>Tổng tiền</th>
+                    <th>Khách đã trả</th>
+                    <th>Khách cần trả</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% datPhongs.forEach(datPhong=> { %>
+                    <tr class="room-row" data-room-id="<%= datPhong.id %>">
+                        <td>
+                            DP00<%= datPhong.id %>
+                        </td>
+                        <td>
+                            <%= datPhong.trangThai %>
+                        </td>
+                        <td>
+                            <%= datPhong.thoiGianDat %>
+                        </td>
+                        <td>
+                            <%= datPhong.tenPhong %>
+                        </td>
+                        <td>
+                            <%= datPhong.tongTien %>
+                        </td>
+                        <td>
+                            <%= datPhong.daTT || '0' %>
+                        </td>
+                        <td>
+                            <%= datPhong.canTT %>
+                        </td>
+                        <td>
+                            <button class="btn edit ">Xử lý</button>
+                            <form action="/cancel-datphong/<%= datPhong.id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Bạn có chắc chắn muốn hủy bỏ đơn đặt phòng này không ?');">Hủy</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr class="room-detail-row" data-room-id="<%= datPhong.id %>">
+                        <td colspan="8">
+                            <div class="room-detail">
+                                <div class="room-content">
+                                    <div class="room-info">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><strong>Mã hạng phòng:</strong>
+                                                    <%= datPhong.maHangPhong %>
+                                                </p>
+                                                <p><strong>Tên hạn phòng:</strong>
+                                                    <%= datPhong.tenHangPhong %>
+                                                </p>
+                                                <p><strong>Đơn giá:</strong>
+                                                    <%= datPhong.donGia %>
+                                                </p>
+                                                <p><strong>Tổng tiền phòng:</strong>
+                                                    <%= datPhong.tongTienPhong %>
+                                                </p>
+                                                <p><strong>Tên khách hàng:</strong>
+                                                    <%= datPhong.tenKhachHang %>
+                                                        <%= datPhong.soCCCD %>
+                                                </p>
+                                            </div>
+                                            <div class="col">
+                                                <p><strong>Hình thức:</strong>
+                                                    <%= datPhong.hinhThuc %>
+                                                </p>
+                                                <p><strong>Thời gian nhận:</strong>
+                                                    <%= datPhong.tGNhan %>
+                                                </p>
+                                                <p><strong>Thời Gian trả:</strong>
+                                                    <%= datPhong.tGTra %>
+                                                </p>
+                                                <p><strong>Ghi chú:</strong>
+                                                    <%= datPhong.ghiChu %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <table class="table-room-categories">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã hàng hóa</th>
+                                                        <th>Tên hàng hóa</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Đơn giá</th>
+                                                        <th>Thành tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% datPhong.services.forEach(service=> { %>
+                                                        <tr class="room-row" data-room-id="<%= service.maHangHoa %>">
+                                                            <td>
+                                                                DP00<%= service.maHangHoa %>
+                                                            </td>
+                                                            <td>
+                                                                <%= service.tenHangHoa %>
+                                                            </td>
+                                                            <td>
+                                                                <%= service.donGia %>
+                                                            </td>
+                                                            <td>
+                                                                <%= service.soLuong %>
+                                                            </td>
+                                                            <td>
+                                                                <%= service.thanhTien %>
+                                                            </td>
+                                                        </tr>
+                                                        <% }) %>
+                                                            <tr class="room-row">
+                                                                <td colspan="5">
+                                                                    <p style="float: right"><strong>Tổng tiền
+                                                                            hàng:</strong>
+                                                                        <%= datPhong.tongTienDV %>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    // JavaScript hiển thị chi tiết
+    document.querySelectorAll(".room-row").forEach(row => {
+        row.addEventListener("click", (e) => {
+            // Bỏ qua nếu click vào nút
+            if (e.target.classList.contains('btn')) return;
+
+            const roomId = row.getAttribute("data-room-id");
+            const detailRow = document.querySelector(`.room-detail-row[data-room-id="${roomId}"]`);
+
+            // Toggle hiển thị
+            if (detailRow.style.display === "none" || detailRow.style.display === "") {
+                detailRow.style.display = "table-row";
+            } else {
+                detailRow.style.display = "none";
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const updateButtons = document.querySelectorAll('.btn-update');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                document.getElementById('updateForm').action = `/hanghoa/${id}/update`;
+            });
+        });
+    });
+</script>
